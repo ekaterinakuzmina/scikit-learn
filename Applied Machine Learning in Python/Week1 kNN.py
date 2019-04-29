@@ -8,7 +8,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-fruits = pd.read_table('readonly/fruit_data_with_colors.txt')
+#fruits = pd.read_table('readonly/fruit_data_with_colors.txt')
+url = 'https://github.com/ekaterinakuzmina/scikit-learn/blob/master/Applied%20Machine%20Learning%20in%20Python/fruits.csv'
+fruits = pd.read_csv(url, index_col=0, parse_dates=[0])
 
 fruits.head()
 
@@ -31,9 +33,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 cmap = cm.get_cmap('gnuplot')
 scatter = pd.scatter_matrix(X_train, c= y_train, marker = 'o', s=40, hist_kwds={'bins':15}, figsize=(9,9), cmap=cmap)
 
-
-# In[ ]:
-
 # plotting a 3D scatter plot
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -48,8 +47,6 @@ plt.show()
 
 # ### Create train-test split
 
-# In[ ]:
-
 # For this example, we use the mass, width, and height features of each fruit instance
 X = fruits[['mass', 'width', 'height']]
 y = fruits['fruit_label']
@@ -60,8 +57,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 # ### Create classifier object
 
-# In[ ]:
-
 from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors = 5)
@@ -69,14 +64,10 @@ knn = KNeighborsClassifier(n_neighbors = 5)
 
 # ### Train the classifier (fit the estimator) using the training data
 
-# In[ ]:
-
 knn.fit(X_train, y_train)
 
 
 # ### Estimate the accuracy of the classifier on future data, using the test data
-
-# In[ ]:
 
 knn.score(X_test, y_test)
 
